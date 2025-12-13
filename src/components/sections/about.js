@@ -125,7 +125,20 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'HTML/CSS','TypeScript', 'React', 'Node.js', 'Angular', 'Rxjs', 'Others: Nginx, Github Action/Gitlab CI'];
+  const skills = [
+    'JavaScript (ES6+)',
+    'HTML/CSS',
+    'TypeScript',
+    'React',
+    'Node.js',
+    'Angular',
+    'Rxjs',
+  ];
+
+  const selfStudySkills = [
+    'Cloud computing with Nginx for a web server',
+    'Github Action/Gitlab CI',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -135,20 +148,29 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! My name is Mason Nguyen and I enjoy creating things that live on the internet. My
-              interest in web development started back in 2020
+              Hello! My name is Mason Nguyen and I enjoy creating things that live on the internet.
+              My interest in web development started back in 2020
             </p>
 
             <p>
-            Passionate about building scalable, user-centric web applications with a strong
-            focus on code architecture and maintainability through the effective application of <b>Design Patterns</b> and <b>SOLID principles</b>
+              Passionate about building scalable, user-centric web applications with a strong focus
+              on code architecture and maintainability through the effective application of{' '}
+              <b>Design Patterns</b> and <b>SOLID principles</b>
             </p>
 
             <p>Here are a few technologies I’ve been working with recently:</p>
           </div>
 
+          <p>
+            <ul className="skills-list">
+              {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+            </ul>
+          </p>
+          <p></p>
+
+          <p>Some technologies I’ve been self studying:</p>
           <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+            {selfStudySkills && selfStudySkills.map((skill, i) => <li key={i}>{skill}</li>)}
           </ul>
         </StyledText>
 
