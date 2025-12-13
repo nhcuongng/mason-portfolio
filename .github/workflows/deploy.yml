@@ -4,6 +4,9 @@ on:
   push:
     branches: ["dev-me"]
 
+env:
+  BUILD_DIR: public
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,7 +36,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: dist-files
-        path: public/
+        path: ${{ env.BUILD_DIR }}/
         retention-days: 1
 
   deploy-develop:
@@ -50,7 +53,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: dist-files
-        path: public/
+        path: ${{ env.BUILD_DIR }}/
 
     - name: Setup SSH
       run: |
@@ -63,8 +66,7 @@ jobs:
       run: |
         # Create deployment directory and deploy files
         ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ env.DEPLOY_DIR }}"
-        scp -i ~/.ssh/id_rsa -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.DEPLOY_DIR }}/
-
+        scp -i ~/.ssh/id_rsa -r ./${{ env.BUILD_DIR }}/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.DEPLOY_DIR }}/
 
     - name: Reload nginx server
       run: ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo nginx -s reload"
