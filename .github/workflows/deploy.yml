@@ -1,4 +1,4 @@
-name: Deploy to formbuilder.nhcuong.cloud
+name: Deploy to nhcuong.cloud
 
 on:
   push:
@@ -16,6 +16,9 @@ jobs:
       with:
         node-version: "v14.16.0"
         cache: 'npm'
+
+    - name: Instal gatsby
+      run: npm install -g gatsby-cli
 
     - name: Install dependencies
       run: yarn
