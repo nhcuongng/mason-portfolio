@@ -1,0 +1,79 @@
+name: Deploy to formbuilder.nhcuong.cloud
+
+on:
+  push:
+    branches: ["dev-me"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v6
+      with:
+        node-version: "v14.16.0"
+        cache: 'npm'
+
+    - name: Cache node modules
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Install dependencies
+      run: npm i
+
+    - name: Extend node memory
+      run: export NODE_OPTIONS="--max-old-space-size=8192"
+
+    - name: Build application
+      run: npm run build
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: dist-files
+        path: dist/
+        retention-days: 1
+
+  deploy-develop:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: staging
+    # if: github.ref == 'refs/heads/develop'
+
+    env:
+      DEPLOY_DIR: /var/www/portfolio
+
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: dist-files
+        path: dist/
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy application
+      run: |
+        # Create deployment directory and deploy files
+        ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ env.DEPLOY_DIR }}"
+        scp -i ~/.ssh/id_rsa -r ./dist/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.DEPLOY_DIR }}/
+
+
+    - name: Reload nginx server
+      run: ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo nginx -s reload"
+
+    - name: Cleanup SSH
+      if: always()
+      run: rm -f ~/.ssh/id_rsa
