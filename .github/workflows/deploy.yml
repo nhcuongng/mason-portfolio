@@ -24,7 +24,7 @@ jobs:
       run: npm install -g gatsby-cli
 
     - name: Instal yarn
-      run: npm install -g yarn
+      run: npm install -g corepack && corepack prepare yarn@3.8.7 --activate
 
     - name: Install dependencies
       run: yarn
