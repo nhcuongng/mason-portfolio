@@ -11,10 +11,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Use Node.js 14.x
+    - id: nvmrc
+      uses: browniebroke/read-nvmrc-action@v1
+
+    - name: Use Node.js from nvmrc
       uses: actions/setup-node@v6
       with:
-        node-version: "v14.16.0"
+        node-version: '${{ steps.nvmrc.outputs.node_version }}'
         cache: 'npm'
 
     - name: Instal gatsby
@@ -27,7 +30,7 @@ jobs:
       run: export NODE_OPTIONS="--max-old-space-size=8192"
 
     - name: Build application
-      run: yarn build
+      run: npm run build
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
