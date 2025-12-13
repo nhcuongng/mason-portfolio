@@ -23,9 +23,6 @@ const StyledProject = styled.li`
   grid-template-columns: repeat(12, 1fr);
   align-items: center;
 
-  --project-content-odd-end: 8;
-  --project-content-end: 5;
-
   @media (max-width: 768px) {
     ${({ theme }) => theme.mixins.boxShadow};
   }
@@ -44,7 +41,7 @@ const StyledProject = styled.li`
 
   &:nth-of-type(odd) {
     .project-content {
-      grid-column: var(--project-content-odd-end) / -1;
+      grid-column: 7 / -1;
       text-align: right;
 
       @media (max-width: 1080px) {
@@ -86,7 +83,7 @@ const StyledProject = styled.li`
       }
     }
     .project-image {
-      grid-column: 1 / var(--project-content-odd-end);
+      grid-column: 1 / 8;
 
       @media (max-width: 768px) {
         grid-column: 1 / -1;
@@ -96,7 +93,7 @@ const StyledProject = styled.li`
 
   .project-content {
     position: relative;
-    grid-column: 1 / var(--project-content-end);
+    grid-column: 1 / 7;
     grid-row: 1 / -1;
 
     @media (max-width: 1080px) {
@@ -195,15 +192,10 @@ const StyledProject = styled.li`
 
     li {
       margin: 0 20px 5px 0;
-      color: var(--dark-navy);
+      color: var(--light-slate);
       font-family: var(--font-mono);
       font-size: var(--fz-xs);
       white-space: nowrap;
-      background-color: var(--green);
-      border: 1px solid var(--green);
-      border-radius: var(--border-radius);
-      padding: 0.25rem;
-      transition: var(--transition);
     }
 
     @media (max-width: 768px) {
@@ -250,7 +242,7 @@ const StyledProject = styled.li`
 
   .project-image {
     ${({ theme }) => theme.mixins.boxShadow};
-    grid-column: var(--project-content-end) / -1;
+    grid-column: 6 / -1;
     grid-row: 1 / -1;
     position: relative;
     z-index: 1;
@@ -299,7 +291,7 @@ const StyledProject = styled.li`
     .img {
       border-radius: var(--border-radius);
       mix-blend-mode: multiply;
-      filter: grayscale(40%) contrast(1) brightness(90%);
+      filter: grayscale(100%) contrast(1) brightness(90%);
 
       @media (max-width: 768px) {
         object-fit: cover;
@@ -330,6 +322,7 @@ const Featured = () => {
               tech
               github
               external
+              cta
             }
             html
           }
@@ -362,7 +355,7 @@ const Featured = () => {
         {featuredProjects &&
           featuredProjects.map(({ node }, i) => {
             const { frontmatter, html } = node;
-            const { external, title, tech, github, cover } = frontmatter;
+            const { external, title, tech, github, cover, cta } = frontmatter;
             const image = getImage(cover);
 
             return (
@@ -389,12 +382,17 @@ const Featured = () => {
                     )}
 
                     <div className="project-links">
+                      {cta && (
+                        <a href={cta} aria-label="Course Link" className="cta">
+                          Learn More
+                        </a>
+                      )}
                       {github && (
                         <a href={github} aria-label="GitHub Link">
                           <Icon name="GitHub" />
                         </a>
                       )}
-                      {external && (
+                      {external && !cta && (
                         <a href={external} aria-label="External Link" className="external">
                           <Icon name="External" />
                         </a>

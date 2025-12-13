@@ -1,18 +1,26 @@
 module.exports = {
-  email: 'cuong.nguyenhuu1997@gmail.com',
+  email: 'brittany.chiang@gmail.com',
 
   socialMedia: [
     {
       name: 'GitHub',
-      url: 'https://github.com/nhcuongng',
+      url: 'https://github.com/bchiang7',
+    },
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/bchiang7',
+    },
+    {
+      name: 'Twitter',
+      url: 'https://twitter.com/bchiang7',
     },
     {
       name: 'Linkedin',
-      url: 'https://www.linkedin.com/in/cuong-nguyen-huu-8420bb205/',
+      url: 'https://www.linkedin.com/in/bchiang7',
     },
     {
-      name: 'Telegram',
-      url: 'https://t.me/nhcuongng',
+      name: 'Codepen',
+      url: 'https://codepen.io/bchiang7',
     },
   ],
 
@@ -36,7 +44,7 @@ module.exports = {
   ],
 
   colors: {
-    green: 'red',
+    green: '#64ffda',
     navy: '#0a192f',
     darkNavy: '#020c1b',
   },
