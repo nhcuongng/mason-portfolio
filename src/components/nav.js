@@ -216,7 +216,7 @@ const Nav = ({ isHome }) => {
       <StyledNav>
         {prefersReducedMotion ? (
           <>
-            {Logo}
+            {/* {Logo} */}
 
             <StyledLinks>
               <ol>
@@ -234,13 +234,14 @@ const Nav = ({ isHome }) => {
           </>
         ) : (
           <>
-            <TransitionGroup component={null}>
+            <div></div>
+            {/* <TransitionGroup component={null}>
               {isMounted && (
                 <CSSTransition classNames={fadeClass} timeout={timeout}>
                   <>{Logo}</>
                 </CSSTransition>
               )}
-            </TransitionGroup>
+            </TransitionGroup> */}
 
             <StyledLinks>
               <ol>
