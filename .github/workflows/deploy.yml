@@ -63,7 +63,7 @@ jobs:
       run: |
         # Create deployment directory and deploy files
         ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ env.DEPLOY_DIR }}"
-        scp -i ~/.ssh/id_rsa -r ./dist/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.DEPLOY_DIR }}/
+        scp -i ~/.ssh/id_rsa -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ env.DEPLOY_DIR }}/
 
 
     - name: Reload nginx server
