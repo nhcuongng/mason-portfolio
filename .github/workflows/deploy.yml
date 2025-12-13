@@ -23,8 +23,11 @@ jobs:
     - name: Instal gatsby
       run: npm install -g gatsby-cli
 
+    - name: Instal yarn
+      run: npm install -g yarn
+
     - name: Install dependencies
-      run: yarn --frozen-lockfile
+      run: yarn
 
     - name: Extend node memory
       run: export NODE_OPTIONS="--max-old-space-size=8192"
