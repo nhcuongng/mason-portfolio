@@ -1,21 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+  Bookmark,
+  ExternalLink,
+  Folder,
+  GitFork,
+  Github,
+  Instagram,
+  Linkedin,
+  Loader2,
+  Star,
+  Twitter,
+  CheckCheck,
+} from 'lucide-react';
+import {
   IconAppStore,
-  IconBookmark,
   IconCodepen,
-  IconExternal,
-  IconFolder,
-  IconFork,
-  IconGitHub,
-  IconInstagram,
-  IconLinkedin,
-  IconLoader,
   IconLogo,
   IconPlayStore,
-  IconStar,
-  IconTwitter,
-  IconTelegram
+  IconTelegram,
 } from '@components/icons';
 
 const Icon = ({ name }) => {
@@ -23,35 +26,37 @@ const Icon = ({ name }) => {
     case 'AppStore':
       return <IconAppStore />;
     case 'Bookmark':
-      return <IconBookmark />;
+      return <Bookmark />;
     case 'Codepen':
       return <IconCodepen />;
     case 'External':
-      return <IconExternal />;
+      return <ExternalLink />;
     case 'Folder':
-      return <IconFolder />;
+      return <Folder />;
     case 'Fork':
-      return <IconFork />;
+      return <GitFork />;
     case 'GitHub':
-      return <IconGitHub />;
+      return <Github />;
     case 'Instagram':
-      return <IconInstagram />;
+      return <Instagram />;
     case 'Linkedin':
-      return <IconLinkedin />;
+      return <Linkedin />;
     case 'Loader':
-      return <IconLoader />;
+      return <Loader2 className="animate-spin" />;
     case 'Logo':
       return <IconLogo />;
     case 'PlayStore':
       return <IconPlayStore />;
     case 'Star':
-      return <IconStar />;
+      return <Star />;
     case 'Twitter':
-      return <IconTwitter />;
+      return <Twitter />;
     case 'Telegram':
       return <IconTelegram />;
+    case 'Double checked':
+      return <CheckCheck />;
     default:
-      return <IconExternal />;
+      return <ExternalLink />;
   }
 };
 

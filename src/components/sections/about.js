@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
+import { Icon } from '../icons';
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -31,18 +32,28 @@ const StyledText = styled.div`
     li {
       position: relative;
       margin-bottom: 10px;
-      padding-left: 20px;
       font-family: var(--font-mono);
       font-size: var(--fz-xs);
+      display: flex;
+      align-items: center;
 
-      &:before {
-        content: '▹';
+      svg {
+        display: inline-block;
+        margin-right: 6px;
+        width: 12px;
+        height: 12px;
+        color: var(--green);
+        flex-shrink: 0;
+      }
+
+      /* &:before {
+        content: '';
         position: absolute;
         left: 0;
         color: var(--green);
         font-size: var(--fz-sm);
         line-height: 12px;
-      }
+      } */
     }
   }
 `;
@@ -136,7 +147,7 @@ const About = () => {
   ];
 
   const selfStudySkills = [
-    'Cloud computing with Nginx for a web server',
+    'Cloud Computing using Nginx as a Web Server',
     'Github Action/Gitlab CI',
   ];
 
@@ -163,14 +174,26 @@ const About = () => {
 
           <p>
             <ul className="skills-list">
-              {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+              {skills &&
+                skills.map((skill, i) => (
+                  <li key={i} className="skill-item">
+                    <Icon name="Star" />
+                    <span>{skill}</span>
+                  </li>
+                ))}
             </ul>
           </p>
           <p></p>
 
           <p>Some technologies I’ve been self studying:</p>
           <ul className="skills-list">
-            {selfStudySkills && selfStudySkills.map((skill, i) => <li key={i}>{skill}</li>)}
+            {selfStudySkills &&
+              selfStudySkills.map((skill, i) => (
+                <li key={i} className="skill-item">
+                  <Icon name="Star" />
+                  <span>{skill}</span>
+                </li>
+              ))}
           </ul>
         </StyledText>
 
