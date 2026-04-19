@@ -65,7 +65,7 @@ jobs:
             export TAG=sha-${{ github.sha }}
           
             cd /app/portfolio
-            mv compose.prod.yml compose.yml
+            mv compose.prod.yaml compose.yaml
             docker compose pull
             docker compose up -d
             docker image prune -af  # Xóa image cũ để tiết kiệm ổ cứng VPS
