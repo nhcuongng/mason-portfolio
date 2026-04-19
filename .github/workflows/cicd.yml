@@ -9,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     steps:
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v6
