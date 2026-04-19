@@ -15,16 +15,10 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            name/app
-            ghcr.io/username/app
+            portfolio
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=schedule
             type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
             type=sha
 
       - name: Login to Docker Hub
@@ -48,3 +42,27 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Copy docker compose
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST_VIETNIX }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "compose.prod.yaml"
+          target: "/app/portfolio"
+        
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST_VIETNIX }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            export TAG=sha-${{ github.sha }}
+          
+            cd /app/portfolio
+            mv compose.prod.yml compose.yml
+            docker compose pull
+            docker compose up -d
+            docker image prune -af  # Xóa image cũ để tiết kiệm ổ cứng VPS
