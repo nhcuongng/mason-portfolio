@@ -50,7 +50,7 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST_VIETNIX }}
-          username: ${{ secrets.USERNAME }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "compose.prod.yaml"
           target: "/app/portfolio"
@@ -59,7 +59,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST_VIETNIX }}
-          username: ${{ secrets.USERNAME }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             export TAG=sha-${{ github.sha }}
