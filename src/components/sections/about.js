@@ -146,10 +146,7 @@ const About = () => {
     'Rxjs',
   ];
 
-  const selfStudySkills = [
-    'Cloud Computing using Nginx as a Web Server',
-    'Github Action/Gitlab CI',
-  ];
+  const devopsSkill = ['Nginx Proxy Manager', 'Github Action', 'Docker'];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -169,7 +166,7 @@ const About = () => {
               <b>Design Patterns</b> and <b>SOLID principles</b>
             </p>
 
-            <p>Here are a few technologies I’ve been working with recently:</p>
+            <p>Languages & Frameworks:</p>
           </div>
 
           <p>
@@ -177,7 +174,7 @@ const About = () => {
               {skills &&
                 skills.map((skill, i) => (
                   <li key={i} className="skill-item">
-                    <Icon name="Star" />
+                    <Icon name="Code" />
                     <span>{skill}</span>
                   </li>
                 ))}
@@ -185,12 +182,12 @@ const About = () => {
           </p>
           <p></p>
 
-          <p>Some technologies I’ve been self studying:</p>
+          <p>DevOps & Tools:</p>
           <ul className="skills-list">
-            {selfStudySkills &&
-              selfStudySkills.map((skill, i) => (
+            {devopsSkill &&
+              devopsSkill.map((skill, i) => (
                 <li key={i} className="skill-item">
-                  <Icon name="Star" />
+                  <Icon name="Code" />
                   <span>{skill}</span>
                 </li>
               ))}
