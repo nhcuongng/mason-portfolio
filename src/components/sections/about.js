@@ -22,7 +22,7 @@ const StyledAboutSection = styled.section`
 const StyledText = styled.div`
   ul.skills-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 200px));
+    grid-template-columns: 1fr;
     grid-gap: 0 10px;
     padding: 0;
     margin: 20px 0 0 0;
@@ -136,17 +136,13 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = [
-    'JavaScript (ES6+)',
-    'HTML/CSS',
-    'TypeScript',
-    'React',
-    'Node.js',
-    'Angular',
-    'Rxjs',
-  ];
+  const skills = ['Frontend: React, Angular, TypeScript, Rxjs.', 'Backend: Node.js.'];
 
-  const devopsSkill = ['Nginx Proxy Manager', 'Github Action', 'Docker'];
+  const devopsSkill = [
+    'Web Server: Nginx (Reverse Proxy), PM2',
+    'CI/CD: GitHub Actions, GitLab CI',
+    'Containerization: Docker & Docker Compose',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -156,14 +152,15 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! My name is Mason Nguyen and I enjoy creating things that live on the internet.
-              My interest in web development started back in 2020
+              Hello! <b>My name is Mason Nguyen</b>. I’m a developer who loves building scalable,
+              user-centric web applications. My journey into the world of code began in 2020, and
+              since then, I’ve focused on creating maintainable systems through the effective
+              application of <b>Design Patterns</b> and <b>SOLID principles</b>
             </p>
 
             <p>
-              Passionate about building scalable, user-centric web applications with a strong focus
-              on code architecture and maintainability through the effective application of{' '}
-              <b>Design Patterns</b> and <b>SOLID principles</b>
+              I thrive at the intersection of clean architecture and modern frontend technologies.
+              Here’s what I’ve been working with recently:
             </p>
 
             <p>Languages & Frameworks:</p>
