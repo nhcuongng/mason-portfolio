@@ -12,6 +12,7 @@ import {
   Star,
   Twitter,
   CheckCheck,
+  Code,
 } from 'lucide-react';
 import {
   IconAppStore,
@@ -55,6 +56,8 @@ const Icon = ({ name }) => {
       return <IconTelegram />;
     case 'Double checked':
       return <CheckCheck />;
+    case 'Code':
+      return <Code />;
     default:
       return <ExternalLink />;
   }
